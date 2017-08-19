@@ -42,6 +42,7 @@
     "feathers-hooks-common": "^3.7.1",
     "feathers-rest": "^1.8.0",
     "feathers-rethinkdb": "^0.4.3",
+    "feathers-schema": "^0.1.17",
     "feathers-socketio": "^2.0.0",
     "helmet": "^3.8.1",
     "rethinkdbdash": "^2.3.31",
