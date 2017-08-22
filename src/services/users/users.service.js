@@ -3,7 +3,7 @@ const createService = require('feathers-rethinkdb');
 const hooks = require('./users.hooks');
 const filters = require('./users.filters');
 
-module.exports = function () {
+module.exports = function() {
 	const app = this;
 	const Model = app.get('rethinkdbClient');
 	const paginate = app.get('paginate');

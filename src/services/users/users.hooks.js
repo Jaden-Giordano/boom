@@ -17,7 +17,7 @@ const restrict = [
 	})
 ];
 
-const userSchema = require('./users.schema.js');
+const userSchema = require('./users.schema');
 
 module.exports = {
 	before: {
@@ -34,7 +34,7 @@ module.exports = {
 		all: [
 			commonHooks.when(
 				hook => hook.params.provider,
-				commonHooks.discard('password')
+				commonHooks.discard('password', 'email')
 			)
 		],
 		find: [],

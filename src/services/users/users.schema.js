@@ -1,5 +1,4 @@
-const feathers_schema = require('feathers-schema');
-const Schema = feathers_schema.Schema;
+const Schema = require('feathers-schema').Schema;
 
 module.exports = new Schema({
 	user: { type: String, required: true },
