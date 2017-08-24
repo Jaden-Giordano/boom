@@ -16,8 +16,8 @@ const restrict = [
 		ownerField: 'id'
 	})
 ];
-const ajv = require('ajv');
 
+const ajv = require('ajv');
 const userSchema = require('./users.schema');
 
 module.exports = {
