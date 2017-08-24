@@ -5,15 +5,35 @@
 
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/kube/6.5.2/css/kube.min.css" />
-	<link rel="stylesheet" type="text/css" href="styles/main.css" />
+	<link rel="stylesheet" type="text/css" href="style/main.css" />
+
+	<script src="https://unpkg.com/jquery@3.2.1"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+	<script src="https://code.angularjs.org/1.6.5/angular-route.min.js"></script>
 </head>
 
 <body>
+	<div ng-app="boom">
+		<nav class="navbar navbar-colored">
+			<ul class="row between">
+				<li class="col col-3">
+					<a href="#!" class="h2 inverted" style="text-decoration: none;">Boom</a>
+				</li>
+				<li class="col col-3">
+					<div class="row align-right">
+						<a href="#!/login" class="button inverted outline">Login</a>
+					</div>
+				</li>
+			</ul>
+		</nav>
 
+		<ng-view></ng-view>
+	</div>
 
-	<script src="https://unpkg.com/vue"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/kube/6.5.2/js/kube.min.js"></script>
-	<script src="https://unpkg.com/craftyjs"></script>
+	<!--<script src="https://unpkg.com/craftyjs"></script>-->
+
+	<script src="js/app.js"></script>
 </body>
 
 </html>
