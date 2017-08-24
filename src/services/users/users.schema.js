@@ -1,17 +1,23 @@
-const Schema = require('feathers-schema').Schema;
-
-module.exports = new Schema({
-	user: { type: String, required: true },
-	password: { type: String, required: true },
-	email: String,
-	name: String,
-	stats: {
-		kills: { type: Number, default: 0, range: ['>=', 0, 'cannot have less than 0 kills.'] },
-		deaths: { type: Number, default: 0, range: ['>=', 0, 'cannot have less than 0 deaths.'] },
-		bombs_placed: { type: Number, default: 0, range: ['>=', 0, 'cannot have less than 0 bombs placed.'] },
-		powerups_used: { type: Number, default: 0, range: ['>=', 0, 'cannot have less than 0 powerups used.'] },
-		games_played: { type: Number, default: 0, range: ['>=', 0, 'cannot have less than 0 games played.'] },
-		wins: { type: Number, default: 0, range: ['>=', 0, 'cannot have less than 0 wins.'] },
-		losses: { type: Number, default: 0, range: ['>=', 0, 'cannot have less than 0 losses.'] }
-	}
-});
+module.exports = {
+	type: 'object',
+	properties: {
+		user: { type: 'string' },
+		password: { type: 'string' },
+		email: { type: 'string' },
+		name: { type: 'string' },
+		stats: {
+			type: 'object',
+			properties: {
+				kills: { type: 'number', minimum: 0 },
+				deaths: { type: 'number', minimum: 0 },
+				bombs_placed: { type: 'number', minimum: 0 },
+				powerups_used: { type: 'number', minimum: 0 },
+				games_played: { type: 'number', minimum: 0 },
+				wins: { type: 'number', minimum: 0 },
+				losses: { type: 'number', minimum: 0 }
+			},
+			required: ['kills', 'deaths', 'bombs_placed', 'powerups_used', 'games_played', 'wins', 'losses']
+		}
+	},
+	required: ['user', 'password']
+};
