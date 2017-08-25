@@ -19,7 +19,7 @@
 				"type": "access"
 			},
 			"audience": "https://localhost:3030",
-			"subject": "anonymous",
+			"subject": "authentication",
 			"issuer": "feathers",
 			"algorithm": "HS256",
 			"expiresIn": "1d"
