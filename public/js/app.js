@@ -50,11 +50,9 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 						let obj = JSON.parse(atob(data));
 						if (obj) {
 							$rootScope.user_id = obj.userId;
-							return true;
 						}
 					}
 				}
-				return false;
 			}
 		};
 	})
@@ -94,7 +92,8 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 		console.log($routeParams.id); // eslint-disable-line no-console
 
 		$http.get('http://localhost:3030/users/' + $routeParams.id).then(function(res) {
-			console.log(res); // eslint-disable-line no-console
+			if (res.data)
+				$scope.user = res.data;
 		}, function(err) {
 			console.log(err); // eslint-disable-line no-console
 		});
