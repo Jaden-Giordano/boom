@@ -24,7 +24,7 @@ module.exports = {
 	before: {
 		all: [],
 		find: [authenticate('jwt')],
-		get: [...restrict],
+		get: [],
 		create: [validateSchema(userSchema, ajv), hashPassword()],
 		update: [...restrict, validateSchema(userSchema, ajv), hashPassword()],
 		patch: [...restrict, validateSchema(userSchema, ajv), hashPassword()],
