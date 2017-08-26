@@ -3,17 +3,17 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 		$routeProvider
 			.when('/', {
 				templateUrl: 'view/home.html',
-				controller: 'home',
+				controller: 'HomeController',
 				resolve: 'auth'
 			})
 			.when('/login', {
 				templateUrl: 'view/login.html',
-				controller: 'login',
+				controller: 'LoginController',
 				resolve: 'auth'
 			})
 			.when('/users/:id', {
 				templateUrl: 'view/user.html',
-				controller: 'user'
+				controller: 'UserController'
 			});
 	})
 	.factory('auth', function($http) {
@@ -41,11 +41,11 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 			}
 		};
 	})
-	.controller('home', ['$scope', '$location', 'auth', function($scope, $location, auth) {
+	.controller('HomeController', ['$scope', '$location', 'auth', function($scope, $location, auth) {
 		if (!auth.accept())
 			$location.path('/login');
 	}])
-	.controller('login', ['$scope', '$http', '$location', 'auth', function($scope, $http, $location, auth) {
+	.controller('LoginController', ['$scope', '$http', '$location', 'auth', function($scope, $http, $location, auth) {
 		if (auth.accept())
 			$location.path('/');
 
@@ -70,4 +70,14 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 				console.log('Unauthorized: ' + err); // eslint-disable-line no-console
 			});
 		};
+	}])
+	.controller('UserController', ['$scope', '$http', '$location', '$routeParams', 'auth', function($scope, $http, $location, $routeParams, auth) {
+		if (!auth.accept())
+			$location.path('/login');
+
+		$http.get('http://localhost:3030/user/' + $routeParams.id).then(function(data) {
+			console.log(data); // eslint-disable-line no-console
+		}, function(err) {
+			console.log(err); // eslint-disable-line no-console
+		});
 	}]);
