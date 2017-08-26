@@ -23,7 +23,8 @@
 				</li>
 				<li class="col col-3">
 					<div class="row align-right">
-						<a href="#!/login" class="button inverted outline">Login</a>
+						<a ng-if="!user_id" href="#!/login" class="button inverted outline">Login</a>
+						<a ng-if="user_id" href="#!/users/{{user_id}}" class="button inverted">Profile</a>
 					</div>
 				</li>
 			</ul>
