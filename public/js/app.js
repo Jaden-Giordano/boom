@@ -26,7 +26,7 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 					method: 'POST',
 					url: 'http://localhost:3030/authentication',
 					headers: {
-						"authorization": "Bearer " + localStorage.accessToken
+						'authorization': 'Bearer ' + localStorage.accessToken
 					}
 				}).then(function(res) {
 					if (!res.data.accessToken)
@@ -34,12 +34,12 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 
 					return true;
 				}, function(err) {
-					console.log(err);
+					console.log(err); // eslint-disable-line no-console
 
 					return false;
 				});
 			}
-		}
+		};
 	})
 	.controller('home', ['$scope', '$location', 'auth', function($scope, $location, auth) {
 		if (!auth.accept())
@@ -63,11 +63,11 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 				}
 			}).then(function(res) {
 				if (res.data && res.data.accessToken) {
-					localStorage.accessToken = res.data.accessToken
+					localStorage.accessToken = res.data.accessToken;
 					$location.path('/');
 				}
 			}, function(err) {
-				console.log('Unauthorized');
+				console.log('Unauthorized: ' + err); // eslint-disable-line no-console
 			});
-		}
+		};
 	}]);
