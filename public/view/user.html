@@ -1,64 +1,82 @@
-<div class="row gutters" style="padding: 2%;">
-	<div class="row col col-3 gutters">
-		<div class="col col-12 align-center">
-			<img src="http://thecatapi.com/api/images/get" height="250px"/>
+<div class="panel-spaced">
+	<div ng-if="user" class="row gutters" style="padding: 2%;">
+		<div class="row col col-3 gutters">
+			<div class="col col-12 align-center">
+				<img src="http://thecatapi.com/api/images/get" height="250px"/>
+			</div>
+			<div class="col col-12">
+				<h2 style="margin-bottom: 0;">{{user.name}}</h2>
+				<span style="font-size: .85em;">{{user.id}}</span><br />
+				<span></span>
+			</div>
 		</div>
-		<div class="col col-12">
-			<h2>Jaden</h2>
-			<span>User ID: c30d100f-a047-481d-b5c2-fcfe01c1a4a1</span><br />
-			<span></span>
+		<div class="row col col-9 gutters">
+			<table class="bordered">
+				<tr>
+					<th class="w90">
+						<span>Stat</span>
+					</th>
+					<th>
+						<span class="float-right">Amount</span>
+					</th>
+				</tr>
+				<tr>
+					<td class="w90">
+						Kills
+					</td>
+					<td>
+						<span class="float-right">{{user.stats.kills}}</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="w90">
+						Deaths
+					</td>
+					<td>
+						<span class="float-right">{{user.stats.deaths}}</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="w90">
+						Bombs Placed
+					</td>
+					<td>
+						<span class="float-right">{{user.stats.bombs_placed}}</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="w90">
+						Powerups Used
+					</td>
+					<td>
+						<span class="float-right">{{user.stats.powerups_used}}</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="w90">
+						Games Played
+					</td>
+					<td>
+						<span class="float-right">{{user.stats.games_played}}</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="w90">
+						Wins
+					</td>
+					<td>
+						<span class="float-right">{{user.stats.wins}}</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="w90">
+						Loses
+					</td>
+					<td>
+						<span class="float-right">{{user.stats.losses}}</span>
+					</td>
+				</tr>
+			</table>
 		</div>
-	</div>
-	<div class="row col col-9 gutters">
-		<table class="bordered">
-			<tr>
-				<th class="w90">
-					<span>Stat</span>
-				</th>
-				<th>
-					<span class="float-right">Amount</span>
-				</th>
-			</tr>
-			<tr>
-				<td class="w90">
-					Kills
-				</td>
-				<td>
-					<span class="float-right">1234</span>
-				</td>
-			</tr>
-			<tr>
-				<td class="w90">
-					Kills
-				</td>
-				<td>
-					<span class="float-right">1234</span>
-				</td>
-			</tr>
-			<tr>
-				<td class="w90">
-					Kills
-				</td>
-				<td>
-					<span class="float-right">1234</span>
-				</td>
-			</tr>
-			<tr>
-				<td class="w90">
-					Kills
-				</td>
-				<td>
-					<span class="float-right">1234</span>
-				</td>
-			</tr>
-			<tr>
-				<td class="w90">
-					Kills
-				</td>
-				<td>
-					<span class="float-right">1234</span>
-				</td>
-			</tr>
-		</table>
 	</div>
 </div>
