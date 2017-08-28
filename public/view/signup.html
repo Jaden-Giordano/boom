@@ -1,0 +1,37 @@
+<div class="row" style="height: 60%;">
+	<div class="col col-4 push-middle push-center panel">
+		<div class="row align-center">
+			<h3 class="login-header inverted">Login</h3>
+		</div>
+		<div class="row align-center">
+			<form class="form">
+				<div class="form-item">
+					<label class="inverted">Username</label>
+					<input type="text" ng-model="user.user" name="user" class="w100" />
+					<span ng-if="user_required" style="color: red;">Username is required.</span>
+				</div>
+				<div class="form-item">
+					<label class="inverted">Email</label>
+					<input type="text" ng-model="user.email" name="email" class="w100" />
+					<span ng-if="email_required" style="color: red;">Email is required.</span>
+				</div>
+				<div class="form-item">
+					<label class="inverted">Password</label>
+					<input type="password" ng-model="user.password" name="password" class="w100" />
+					<span ng-if="password_required" style="color: red;">Password is required.</span>
+				</div>
+				<div class="form-item">
+					<label class="inverted">Password Again</label>
+					<input type="password" ng-model="user.password_again" name="password_again" class="w100" />
+					<span ng-if="password_again_required" style="color: red;">Password Again is required.</span>
+				</div>
+				<div class="form-item">
+					<span ng-if="missing_all_fields" style="color: red;">No fields can be missing</span>
+				</div>
+				<div class="row align-center">
+					<button type="submit" ng-click="signup(user)" class="col">Sign Up</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

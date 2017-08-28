@@ -8,8 +8,11 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 			})
 			.when('/login', {
 				templateUrl: 'view/login.html',
-				controller: 'LoginController',
-				resolve: 'auth'
+				controller: 'LoginController'
+			})
+			.when('/signup', {
+				templateUrl: 'view/signup.html',
+				controller: 'SignupController'
 			})
 			.when('/users/:id', {
 				templateUrl: 'view/user.html',
@@ -88,12 +91,71 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 			});
 		};
 	}])
-	.controller('UserController', ['$scope', '$http', '$location', '$routeParams', function($scope, $http, $location, $routeParams) {
-		console.log($routeParams.id); // eslint-disable-line no-console
+	.controller('SignupController', ['$scope', '$http', '$location', 'auth', function($scope, $http, $location, auth) {
+		if (auth.accept())
+			$location.path('/home');
 
+		$scope.signup = function(user) {
+			if (user) {
+				if (user.password !== user.password_again)
+					$scope.password_unmatch = true;
+				else
+					$scope.password_unmatch = false;
+				if (!user.password)
+					$scope.password_required = true;
+				else
+					$scope.password_required = false;
+				if (!user.password_again)
+					$scope.password_again_required = true;
+				else
+					$scope.password_again_required = false;
+				if (!user.user)
+					$scope.user_required = true;
+				else
+					$scope.user_required = false;
+				if (!user.email)
+					$scope.email_required = true;
+				else
+					$scope.email_required = false;
+
+				$http({
+					method: 'post',
+					url: 'http://localhost:3030/users',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					data: {
+						user: user.user,
+						email: user.email,
+						password: user.password
+					}
+				}).then(function(res) { // eslint-disable-line
+
+				}, function(err) { // eslint-disable-line
+
+				});
+			} else {
+				$scope.missing_all_fields = true;
+			}
+		};
+	}])
+	.controller('UserController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
 		$http.get('http://localhost:3030/users/' + $routeParams.id).then(function(res) {
-			if (res.data)
-				$scope.user = res.data;
+			if (res.data) {
+				let user = res.data;
+				if (!res.data.stats) {
+					user.stats = {
+						kills: 0,
+						deaths: 0,
+						bombs_placed: 0,
+						powerups_used: 0,
+						games_played: 0,
+						wins: 0,
+						losses: 0
+					};
+				}
+				$scope.user = user;
+			}
 		}, function(err) {
 			console.log(err); // eslint-disable-line no-console
 		});
