@@ -29,3 +29,7 @@ body {
 
 	font-family: 'Permanent Marker', cursive;
 }
+
+.panel-spaced {
+	margin: 25px;
+}
