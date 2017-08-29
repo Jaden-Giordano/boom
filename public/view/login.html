@@ -1,0 +1,23 @@
+<div class="row" style="height: 60%;">
+	<div class="col col-4 push-middle push-center panel">
+		<div class="row align-center">
+			<h3 class="login-header inverted">Login</h3>
+		</div>
+		<div class="row align-center">
+			<form class="form">
+				<div class="form-item">
+					<label class="inverted">Username</label>
+					<input type="text" ng-model="user.user" name="user" class="w100" />
+				</div>
+				<div class="form-item">
+					<label class="inverted">Password</label>
+					<input type="password" ng-model="user.password" name="password" class="w100" />
+				</div>
+				<div class="row between">
+					<a class="row button outline" href="#!/signup">Sign Up</a>
+					<button type="submit" ng-click="login(user)" class="col">Login</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
