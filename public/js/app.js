@@ -3,8 +3,7 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 		$routeProvider
 			.when('/', {
 				templateUrl: 'view/home.html',
-				controller: 'HomeController',
-				resolve: 'auth'
+				controller: 'HomeController'
 			})
 			.when('/login', {
 				templateUrl: 'view/login.html',
@@ -19,30 +18,29 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 				controller: 'UserController'
 			});
 	})
-	.factory('auth', function($http) {
-		return {
-			accept: function() {
-				if (!localStorage.accessToken)
-					return false;
+	.factory('auth', function($http, $location) {
+		return new Promise((resolve, reject) => {
+			if (!localStorage.accessToken)
+				return reject('Not logged in.');
 
-				return $http({
-					method: 'POST',
-					url: 'http://localhost:3030/authentication',
-					headers: {
-						'authorization': 'Bearer ' + localStorage.accessToken
-					}
-				}).then(function(res) {
-					if (!res.data.accessToken)
-						return false;
+			return $http({
+				method: 'POST',
+				url: 'http://localhost:3030/authentication',
+				headers: {
+					'authorization': 'Bearer ' + localStorage.accessToken
+				}
+			}).then(function(res) {
+				if (!res.data.accessToken) {
+					return reject('Invalid session.');
+				}
 
-					return true;
-				}, function(err) {
-					console.log(err); // eslint-disable-line no-console
+				return resolve(res.data.accessToken);
+			}, function(err) {
+				console.log(err); // eslint-disable-line no-console
 
-					return false;
-				});
-			}
-		};
+				return reject(err);
+			});
+		});
 	})
 	.factory('nav', function($rootScope) {
 		return {
@@ -59,15 +57,13 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 			}
 		};
 	})
-	.controller('HomeController', ['$scope', '$location', 'auth', 'nav', function($scope, $location, auth, nav) {
-		if (!auth.accept())
-			$location.path('/login');
+	.controller('HomeController', ['$scope', '$location', 'nav', 'auth', function($scope, $location, nav, auth) {
+		auth.then(token => localStorage.accessToken = token, err => $location.path('/login'));
 
 		nav.updateProfile();
 	}])
 	.controller('LoginController', ['$scope', '$http', '$location', 'auth', function($scope, $http, $location, auth) {
-		if (auth.accept())
-			$location.path('/');
+		auth.then(token => $location.path('/'));
 
 		$scope.login = function(user) {
 			$http({
@@ -92,8 +88,7 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 		};
 	}])
 	.controller('SignupController', ['$scope', '$http', '$location', 'auth', function($scope, $http, $location, auth) {
-		if (auth.accept())
-			$location.path('/home');
+		auth.then(token => $location.path('/'));
 
 		$scope.signup = function(user) {
 			if (user) {
