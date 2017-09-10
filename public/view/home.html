@@ -1,2 +1,8 @@
-<div ng-if="user_id">
+<div ng-if="!user_id">
+	<h4>Welcome to Boom.io</h4>
+	<p>
+		Please login if you'd like to play!
+	</p>
+</div>
+<div ng-if="user_id" id="game">
 </div>
