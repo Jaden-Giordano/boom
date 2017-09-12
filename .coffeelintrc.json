@@ -1,0 +1,20 @@
+{
+	"eol_last": {
+		"level": "error"
+	},
+	"indentation": {
+		"value": 1,
+		"level": "error"
+	},
+	"max_line_length": {
+		"value": 80,
+		"level": "ignore",
+		"limitComments": true
+	},
+	"no_tabs": {
+		"level": "ignore"
+	},
+	"no_this": {
+		"level": "error"
+	}
+}

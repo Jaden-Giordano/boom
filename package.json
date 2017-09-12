@@ -1,57 +1,92 @@
 {
-  "name": "boom",
-  "description": "Competitive online bomberman archtype",
-  "version": "0.0.0",
-  "homepage": "",
-  "main": "src",
-  "keywords": [
-    "feathers"
-  ],
-  "author": {
-    "name": "",
-    "email": ""
-  },
-  "contributors": [],
-  "bugs": {},
-  "directories": {
-    "lib": "src",
-    "test": "test/"
-  },
-  "engines": {
-    "node": ">= 6.0.0",
-    "yarn": ">= 0.18.0"
-  },
-  "scripts": {
-    "test": "npm run eslint && npm run mocha",
-    "eslint": "eslint src/. test/. --config .eslintrc.json",
-    "start": "node src/",
-    "mocha": "mocha test/ --recursive"
-  },
-  "dependencies": {
-    "body-parser": "^1.17.2",
-    "compression": "^1.7.0",
-    "cors": "^2.8.4",
-    "feathers": "^2.1.7",
-    "feathers-authentication": "^1.2.7",
-    "feathers-authentication-hooks": "^0.1.4",
-    "feathers-authentication-jwt": "^0.3.2",
-    "feathers-authentication-local": "^0.4.4",
-    "feathers-configuration": "^0.4.1",
-    "feathers-errors": "^2.9.1",
-    "feathers-hooks": "^2.0.2",
-    "feathers-hooks-common": "^3.7.1",
-    "feathers-rest": "^1.8.0",
-    "feathers-rethinkdb": "^0.4.3",
-    "feathers-socketio": "^2.0.0",
-    "helmet": "^3.8.1",
-    "rethinkdbdash": "^2.3.31",
-    "serve-favicon": "^2.4.3",
-    "winston": "^2.3.1"
-  },
-  "devDependencies": {
-    "eslint": "^4.4.1",
-    "mocha": "^3.5.0",
-    "request": "^2.81.0",
-    "request-promise": "^4.2.1"
-  }
+	"name": "boom",
+	"description": "Competitive online bomberman archtype",
+	"version": "0.0.0",
+	"homepage": "",
+	"main": "src",
+	"keywords": [
+		"feathers"
+	],
+	"author": {
+		"name": "",
+		"email": ""
+	},
+	"contributors": [],
+	"bugs": {},
+	"directories": {
+		"lib": "src",
+		"test": "test/"
+	},
+	"engines": {
+		"node": ">= 6.0.0",
+		"yarn": ">= 0.18.0"
+	},
+	"coffeelintConfig": {
+		"eol_last": {
+			"level": "error"
+		},
+		"indentation": {
+			"value": 1,
+			"level": "error"
+		},
+		"max_line_length": {
+			"value": 80,
+			"level": "ignore",
+			"limitComments": true
+		},
+		"no_tabs": {
+			"level": "ignore"
+		},
+		"no_this": {
+			"level": "error"
+		}
+	},
+	"scripts": {
+		"test": "npm run lint && npm run mocha",
+		"lint": "coffeelint -f .coffeelintrc.json src/.",
+		"start": "coffee src/",
+		"mocha": "mocha test/ --recursive"
+	},
+	"dependencies": {
+		"body-parser": "^1.17.2",
+		"coffeelint": "^1.16.0",
+		"coffeescript": "next",
+		"compression": "^1.7.0",
+		"cors": "^2.8.4",
+		"feathers": "^2.1.7",
+		"feathers-authentication": "^1.2.7",
+		"feathers-authentication-hooks": "^0.1.4",
+		"feathers-authentication-jwt": "^0.3.2",
+		"feathers-authentication-local": "^0.4.4",
+		"feathers-configuration": "^0.4.1",
+		"feathers-errors": "^2.9.1",
+		"feathers-hooks": "^2.0.2",
+		"feathers-hooks-common": "^3.7.1",
+		"feathers-rest": "^1.8.0",
+		"feathers-rethinkdb": "^0.4.3",
+		"feathers-socketio": "^2.0.0",
+		"helmet": "^3.8.1",
+		"rethinkdbdash": "^2.3.31",
+		"serve-favicon": "^2.4.3",
+		"webpack": "^3.5.6",
+		"winston": "^2.3.1"
+	},
+	"devDependencies": {
+		"coffee-compiler": "^0.3.2",
+		"coffee-loader": "^0.8.0",
+		"css-loader": "^0.28.7",
+		"eslint": "^4.4.1",
+		"html-webpack-plugin": "^2.30.1",
+		"mocha": "^3.5.0",
+		"pug": "^2.0.0-rc.4",
+		"pug-loader": "^2.3.0",
+		"request": "^2.81.0",
+		"request-promise": "^4.2.1",
+		"stylus": "^0.54.5",
+		"stylus-compiler": "^0.2.1",
+		"stylus-loader": "^3.0.1",
+		"vue": "^2.4.2",
+		"vue-loader": "^13.0.4",
+		"vue-template-compiler": "^2.4.2"
+	}
 }
