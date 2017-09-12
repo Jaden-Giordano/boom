@@ -1,5 +1,5 @@
 angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
-	.config($routeProvider => {
+	.config(function($routeProvider) {
 		$routeProvider
 			.when('/', {
 				templateUrl: 'view/home.html',
@@ -18,7 +18,7 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 				controller: 'UserController'
 			});
 	})
-	.factory('util', ['$http', '$rootScope', ($http, $rootScope) => {
+	.service('util', ['$http', '$rootScope', function($http, $rootScope) {
 		return {
 			verify: () => {
 				return new Promise((resolve, reject) => {
@@ -27,9 +27,9 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 
 					return $http({
 						method: 'POST',
-						url: 'http://localhost:3030/utilentication',
+						url: 'http://localhost:3030/authentication',
 						headers: {
-							'utilorization': 'Bearer ' + localStorage.accessToken
+							'authorization': 'Bearer ' + localStorage.accessToken
 						}
 					}).then(res => {
 						if (!res.data.accessToken) {
@@ -49,27 +49,39 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 				});
 			},
 			updateProfile: () => {
+				$rootScope.$apply(function() {
+					$rootScope.user = {
+						logged_in: false
+					};
+				});
 				if (localStorage.accessToken) {
-					if (let data = localStorage.accessToken.split('.')[1]) {
-						if (let obj = JSON.parse(atob(data))) {
-							$rootScope.user_id = obj.userId;
+					let data = localStorage.accessToken.split('.')[1];
+					if (data) {
+						let obj = JSON.parse(atob(data));
+						if (obj) {
+							$rootScope.$apply(function() {
+								$rootScope.user = {
+									logged_in: true,
+									user_id: obj.userId
+								}
+							});
 						}
 					}
 				}
 			}
 		};
 	}])
-	.controller('HomeController', ['$scope', '$location', 'nav', 'util', ($scope, $location, nav, util) => {
+	.controller('HomeController', ['$scope', '$location', 'util', function($scope, $location, util) {
 		return util.verify().then(() => {
-			return nav.updateProfile();
+			return util.updateProfile();
 		}, () => $location.path('/login'));
 	}])
-	.controller('LoginController', ['$scope', '$http', '$location', 'util', ($scope, $http, $location, util) => {
+	.controller('LoginController', ['$scope', '$http', '$location', 'util', function($scope, $http, $location, util) {
 		util.verify().then(() => $location.path('/'), () => {
 			$scope.login = user => {
 				$http({
 					method: 'POST',
-					url: 'http://localhost:3030/utilentication',
+					url: 'http://localhost:3030/authentication',
 					headers: {
 						'Content-Type': 'application/json'
 					},
@@ -89,7 +101,7 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 			};
 		});
 	}])
-	.controller('SignupController', ['$scope', '$http', '$location', 'util', ($scope, $http, $location, util) => {
+	.controller('SignupController', ['$scope', '$http', '$location', 'util', function($scope, $http, $location, util) {
 		util.verify().then(token => $location.path('/'), () => {
 			$scope.signup = (user) => {
 				if (user) {
@@ -119,7 +131,7 @@ angular.module('boom', ['ngRoute']) // eslint-disable-line no-undef
 			};
 		});
 	}])
-	.controller('UserController', ['$scope', '$http', '$routeParams', ($scope, $http, $routeParams) => {
+	.controller('UserController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
 		$http.get('http://localhost:3030/users/' + $routeParams.id).then(res => {
 			let user = res.data;
 			if (user) {
