@@ -1,5 +1,8 @@
-<div>
+<div ng-hide="logged_in == true">
+	<h4>Welcome to Boom.io</h4>
 	<p>
-		Home
+		Please login if you'd like to play!
 	</p>
+</div>
+<div ng-show="logged_in == true" id="game">
 </div>
